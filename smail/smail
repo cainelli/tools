@@ -1,0 +1,20 @@
+#!/usr/local/bin/python
+import smtplib
+smtp = {}
+smtp['hostname'] = 'smtp.u.inova.com.br'
+smtp['port'] = 587
+smtp['username'] = 'fernando.cainelli@velop.net'
+smtp['password'] = ''
+smtp['from'] = 'fernando.cainelli@velop.net'
+smtp['to'] = 'fernando.cainelli@velop.net'
+
+if __name__ == '__main__':
+
+  server = smtplib.SMTP(host=smtp['hostname'], port=smtp['port'])
+  server.login(smtp['username'], smtp['password'])
+
+  with open ('msg.eml', 'r') as f:
+    msg = f.read()
+
+  server.sendmail(smtp['from'], smtp['to'], msg)
+
