@@ -9,8 +9,8 @@ SERVERS = ['10.0.23.11', '10.0.23.8', '10.0.23.9', '10.0.23.41', '10.0.23.52', '
 if __name__ == '__main__':
   
 
-  for srv in SERVERS:
-    os.system('mcinspect list -s %s' % srv)
+  #for srv in SERVERS:
+  #  os.system('mcinspect list -s %s' % srv)
 
   mc = Client(SERVERS, debug=1)
   mc.flush_all()
