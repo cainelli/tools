@@ -4,9 +4,9 @@ smtp = {}
 smtp['hostname'] = 'smtp.u.inova.com.br'
 smtp['port'] = 587
 smtp['username'] = 'fernando.cainelli@velop.net'
-smtp['password'] = ''
+smtp['password'] = '123Sta+His123'
 smtp['from'] = 'fernando.cainelli@velop.net'
-smtp['to'] = 'fernando.cainelli@velop.net'
+smtp['to'] = 'fernando@cainelli.me'
 
 if __name__ == '__main__':
 
