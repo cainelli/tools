@@ -1,0 +1,45 @@
+#!/usr/local/bin/python
+import os, json, sys, time, argparse
+from datadog import initialize, api
+
+
+
+
+def load_cred(overwrite=False):
+  
+  conf_file = '%s/.%s' % (os.path.expanduser('~'), 
+                          os.path.basename(sys.argv[0]))
+  # return conf_file
+  if overwrite or not os.path.isfile(conf_file):
+    cred = {}
+    cred['api_key'] = (raw_input('API Key: '))
+    cred['app_key'] = (raw_input('APP Key: '))
+
+    with open('%s' % conf_file, 'w') as auth_file:
+      json.dump(cred, auth_file)
+  else:
+    with open('%s' % conf_file, 'r') as auth_file:
+      cred = json.load(auth_file)
+
+  return cred
+
+def get_metrics(query):
+  now = int(time.time())
+  feb = 1451692800
+  res = api.Metric.query(start=feb, end=now, query=query)
+  print json.dumps(res, indent=2)
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Datadog CLI.')
+    parser.add_argument('--query', dest='query',
+                        help='query to filter metrics: system.cpu.idle{*}by{host}')
+
+    args = parser.parse_args()
+
+    cred = load_cred(overwrite=False)
+    initialize(**cred)
+
+    if args.query:
+      get_metrics(
+        query = args.query
+    )
